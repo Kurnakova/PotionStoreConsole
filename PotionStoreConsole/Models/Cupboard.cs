@@ -16,17 +16,25 @@ namespace Models
 
         public void AddNewPotion(PotionsInformationClass potion)
         {
-            // TODO: Добавить обработчиков для валидации.
-            Potions.Add(potion);
+            if (potion != null)
+            {
+                Potions.Add(potion);
+            }
+            else
+            {
+                throw new System.Exception("Ошибка зелья.");
+            }
         }
 
         public PotionsInformationClass GetPotionById(int potionId)
         {
             var potion = Potions.FirstOrDefault(p => p.PotionID == potionId);
 
-            // TODO: Ввести проверку на null
-
-            return potion;
+            if (potion != null)
+            {
+                return potion;
+            }
+            throw new System.Exception("Зелье не найдено.");
         }
 
         public void DeletePotionById(int potionId)
@@ -35,18 +43,50 @@ namespace Models
             Potions.Remove(potion);
         }
 
-        public void EditPotion(int potionId, string newTitle, Effect newEffect, string newDescription)
+        public void EditPotion(int potionId, string newTitle, string newEffect, string newDescription)
         {
             var potion = GetPotionById(potionId);
-
-            // TODO: Провалидировать входные данные.
-
-            potion.Title = newTitle;
-            potion.Effect = newEffect;
-            potion.Description = newDescription;
+            if(string.IsNullOrWhiteSpace(newTitle) == false && newTitle.Length <= 50)
+            {
+                potion.Title = newTitle;
+            }
+            else if (newTitle.Length > 50)
+            {
+                throw new System.Exception("Длина названия не должна превышать 50 символов. Отправляйтесь в ад.");
+            }
+            if(string.IsNullOrWhiteSpace(newEffect) == false)
+            {
+                Effect effect = GetNewEffect(newEffect);
+                potion.Effect = effect;
+            }
+            if(string.IsNullOrWhiteSpace(newDescription) == false && newDescription.Length <= 1000)
+            {
+                potion.Description = newDescription;
+            }
+            else if (newTitle.Length > 1000)
+            {
+                throw new System.Exception("Длина названия не должна превышать 1000 символов. Отправляйтесь в ад.");
+            }
         }
-
-
+        private Effect GetNewEffect(string NewEffect)
+        {
+            if (NewEffect == "п")
+            {
+                return Effect.Positive;
+            }
+            else if (NewEffect == "о")
+            {
+                return Effect.Negative;
+            }
+            else if (NewEffect == "н")
+            {
+                return Effect.Neutral;
+            }
+            else
+            {
+                throw new System.Exception("Невозможный эффект.");
+            }
+        }
         private List<PotionsInformationClass> SetPotions()
         {
             List<PotionsInformationClass> potions = new List<PotionsInformationClass>()
