@@ -52,7 +52,7 @@ namespace Models
             }
             else if (newTitle.Length > 50)
             {
-                throw new System.Exception("Длина названия не должна превышать 50 символов. Отправляйтесь в ад.");
+                throw new System.Exception("Длина названия не должна превышать 50 символов.");
             }
             if(string.IsNullOrWhiteSpace(newEffect) == false)
             {

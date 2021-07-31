@@ -19,7 +19,25 @@ namespace Models
             var effect = GetEffect();
             return $"Id: {PotionID}\nНазвание:{Title}\nЭффект: {effect}\n\nОписание: {Description}";
         }
-
+        private static Effect GetNewEffect(string NewEffect)
+        {
+            if (NewEffect == "п")
+            {
+                return Effect.Positive;
+            }
+            else if (NewEffect == "о")
+            {
+                return Effect.Negative;
+            }
+            else if (NewEffect == "н")
+            {
+                return Effect.Neutral;
+            }
+            else
+            {
+                throw new System.Exception("Невозможный эффект.");
+            }
+        }
         private string GetEffect()
         {
             var effect = string.Empty;
