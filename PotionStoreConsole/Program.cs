@@ -142,7 +142,7 @@ namespace PotionProject
             Console.Clear();
             Console.WriteLine("Введите название нового зелья.");
             string newTitle = Console.ReadLine();
-            Console.WriteLine("Выберете эффект нового зелья. Положительный - нажмите п, Отрицательный - нажмите о, Нейтральный - н.");
+            Console.WriteLine("Выберете эффект нового зелья. Положительный - нажмите п, Отрицательный - о, Нейтральный - н.");
             string newEffect = Console.ReadLine();
             Console.WriteLine("Введите описание нового зелья и нажмите enter.");
             string newDescription = Console.ReadLine();
